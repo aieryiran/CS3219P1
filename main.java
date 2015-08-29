@@ -1,18 +1,19 @@
 import java.util.Scanner;
+import SharedData.*;
 
 //User selects architecture type here
 public class main {
-	public static void main(String args[]) {
+	public static void main(String args[]){
 		String s;
 		boolean hasInput = false;
 		Scanner in = new Scanner(System.in);
 		
 		while(!hasInput){
-			System.out.println("Enter 1 to select Architecture 1 or 2 to select Architecture 2");
+			System.out.println("Enter 1 to select Shared Data Architecture or 2 to select Architecture 2");
 			s = in.nextLine();
 			
 			if(s.equals("1")){
-				useA1();
+				useSharedData();
 				hasInput = true;
 			}
 			else if(s.equals("2")){
@@ -27,11 +28,12 @@ public class main {
 		in.close();
 	}
 	
-	static void useA1() {
-
+	static void useSharedData(){
+		master SD = new master();
+		SD.kwic();
 	}
 	
-	static void useA2() {
+	static void useA2(){
 		
 	}
 }
