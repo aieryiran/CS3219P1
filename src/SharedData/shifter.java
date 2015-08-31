@@ -3,17 +3,16 @@ package SharedData;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class shifter {
-	public Map<Integer, List<Integer>> circularShift(String[] titles, String[] ignore){
+	public HashMap<Integer, List<Integer>> circularShift(String[] titles, String[] ignore){
 		String[] split;
 		List<Integer> indices = new ArrayList<Integer>();
 		Integer word_index, title_index;
-		Map<Integer, List<Integer>> shifts = new HashMap<Integer, List<Integer>>();
+		HashMap<Integer, List<Integer>> shifts = new HashMap<Integer, List<Integer>>();
 		
 		for(int i = 0; i < titles.length; i++){
-			// Split the title into different strings
+			// Split the title into its component words
 			split = titles[i].split(" ");
 			
 			// Check if each word in the title is an ignored word
@@ -24,21 +23,22 @@ public class shifter {
 						break;
 					}
 					else {
-						// Create a circular shift with the word's index in the title
-						word_index = new Integer(titles[i].indexOf(split[j]));
-						indices.add(word_index);
+						if(k == ignore.length-1){
+							// Create a circular shift with the word's index in the title
+							word_index = new Integer(titles[i].indexOf(split[j]));
+							indices.add(word_index);
+						}
 					}
 				}
 			}
-			
+						
 			// Store the circular shifts for this title
 			title_index = new Integer(i);
-			shifts.put(title_index, indices);
+			shifts.put(title_index, new ArrayList<Integer>(indices));
 			
-			// Reset variables
 			indices.clear();
 		}
-		
+				
 		return shifts;
 	}
 }
