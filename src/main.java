@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import SharedData.*;
+import ImplicitInvocation.*;
 
 //User selects architecture type here
 public class main {
@@ -34,6 +35,7 @@ public class main {
 	}
 	
 	static void useA2(){
-		
+		IIMaster II = new IIMaster();
+		II.KWIC();
 	}
 }

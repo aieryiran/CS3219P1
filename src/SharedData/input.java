@@ -40,6 +40,7 @@ public class input {
 			}
 			catch (IOException e) {
 				System.out.println("There was an error reading from the file. Please try again.");
+				//e.printStackTrace();
 			}
 		}
 		
