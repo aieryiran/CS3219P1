@@ -10,7 +10,7 @@ public class main {
 		Scanner in = new Scanner(System.in);
 		
 		while(!hasInput){
-			System.out.println("Enter 1 to select Shared Data Architecture or 2 to select Architecture 2");
+			System.out.println("Enter 1 to select Shared Data Architecture or 2 to select Implicit Invocation Architecture");
 			s = in.nextLine();
 			
 			if(s.equals("1")){
@@ -18,7 +18,7 @@ public class main {
 				hasInput = true;
 			}
 			else if(s.equals("2")){
-				useA2();
+				useImplicitInvocation();
 				hasInput = true;
 			}
 			else {
@@ -34,7 +34,7 @@ public class main {
 		SD.kwic();
 	}
 	
-	static void useA2(){
+	static void useImplicitInvocation(){
 		IIMaster II = new IIMaster();
 		II.KWIC();
 	}
