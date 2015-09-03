@@ -1,3 +1,8 @@
+/*
+ * Student: Wen Yiran
+ * Matric No: A0105610Y
+ */
+
 package ImplicitInvocation;
 
 import java.util.Observable;
@@ -18,6 +23,7 @@ public class IICircularShift extends Observable implements Observer  {
 	@Override
 	public void update(Observable lineStorage1, Object arg) {
 		line1 = (IILineStorage1) lineStorage1;
+		changeIgnoreToLowercase();
 		updateLineStorage2();
 	}
 	
@@ -30,7 +36,7 @@ public class IICircularShift extends Observable implements Observer  {
 			for (int j = 0; j < components.length; j++) {
 				StringBuilder newString = new StringBuilder();
 				int index = j, count = 0;
-				if (line1.getIgnore().contains(components[j])) {
+				if (line1.getIgnore().contains(components[j].toLowerCase())) {
 					continue;
 				}
 				while (count < components.length) {
@@ -41,11 +47,20 @@ public class IICircularShift extends Observable implements Observer  {
 					index++;
 					count++;
 				}
-				line2.insertLine(newString.toString());
+				String capitalized = newString.substring(0, 1).toUpperCase() + newString.substring(1);
+				line2.insertLine(capitalized);
 			}
 		}
 		
 		setChanged();
 		notifyObservers();
+	}
+	
+	private void changeIgnoreToLowercase() {
+		ArrayList<String> ignore = line1.getIgnore();
+		for (int i = 0; i < ignore.size(); i++) {
+			ignore.set(i, ignore.get(i).toLowerCase());
+		}
+		line1.updateIgnore(ignore);
 	}
 }

@@ -1,3 +1,8 @@
+/*
+ * Student: Wen Yiran
+ * Matric No: A0105610Y
+ */
+
 package ImplicitInvocation;
 
 import java.util.Scanner;
@@ -12,35 +17,39 @@ public class IIInput {
 		String titlePath, ignorePath;
 		Scanner in = new Scanner(System.in); 
 		ArrayList<String> titleData = null, ignoreData = null;
+		IILineStorage1 line1 = new IILineStorage1();
 		
 		while (true) {
-			System.out.println("Enter filename and extension of titles file:");
-			titlePath = in.nextLine();
-			System.out.println("Enter filename and extension of words to ignore file:");
-			ignorePath = in.nextLine();
-			
-			try {
-				titleData = openFile(titlePath);
-				ignoreData = openFile(ignorePath);
+			if (titleData == null) {
+				System.out.println("Enter filename and extension of titles file:");
+				titlePath = in.nextLine();
+				
+				try {
+					titleData = openFile(titlePath);
+				}
+			    catch (Exception IOException) {
+			    	System.out.println("Error occurs during opening the file. Please try again.");
+			    	continue;
+			    }
 			}
-		    catch (Exception IOException) {
-		    	System.out.println("Error occurs during opening the file. Please try again.");
-		    }
 			
-			if ((titleData != null) && (ignoreData != null)) {
-				break;
+			if (ignoreData == null) {
+				System.out.println("Enter filename and extension of words to ignore file:");
+				ignorePath = in.nextLine();
+				
+				try {
+					ignoreData = openFile(ignorePath);
+				}
+			    catch (Exception IOException) {
+			    	System.out.println("Error occurs during opening the file. Please try again.");
+			    	continue;
+			    }
 			}
+			
+			break;
 		}
 		
-		IILineStorage1 line1 = new IILineStorage1();
-		line1.insertTitle(titleData);
-		line1.insertIgnore(ignoreData);
-		/*for (int i = 0; i < titleData.size(); i++) {
-			line1.insertLine(titleData.get(i));
-		}
-		for (int j = 0; j < ignoreData.size(); j++) {
-			line1.insertIgnore(ignoreData.get(j));
-		}*/
+		line1.insert(titleData, ignoreData);
 	}
 	
 	private ArrayList<String> openFile(String path) throws IOException {
@@ -55,9 +64,5 @@ public class IIInput {
 		
 		textReader.close();
 		return data;
-		/*
-		String[] dataArray = data.toArray(new String[0]);
-		return dataArray;
-		*/
 	}
 }
